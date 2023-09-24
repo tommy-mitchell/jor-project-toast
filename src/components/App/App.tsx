@@ -1,4 +1,5 @@
 import React from "react";
+import ToastProvider from "@components/ToastProvider";
 import ToastPlayground from "@components/ToastPlayground";
 import Footer from "@components/Footer";
 import useEscape from "@hooks/useEscape";
@@ -12,7 +13,9 @@ export default function App() {
 
 	return (
 		<>
-			<ToastPlayground />
+			<ToastProvider>
+				<ToastPlayground />
+			</ToastProvider>
 			<Footer />
 		</>
 	);

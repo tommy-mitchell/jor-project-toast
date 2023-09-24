@@ -21,7 +21,6 @@ export default defineConfig({
 			typescript: true,
 			overlay: {
 				initialIsOpen: false,
-				position: "br",
 			},
 		}),
 		tsconfigPaths(),

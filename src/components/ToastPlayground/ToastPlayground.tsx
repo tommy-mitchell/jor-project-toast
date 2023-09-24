@@ -1,8 +1,8 @@
 import React from "react";
 import type { ToastVariant } from "@components/Toast";
-import ToastShelf, { type ToastItem } from "@components/ToastShelf";
+import { ToastContext } from "@components/ToastProvider";
+import ToastShelf from "@components/ToastShelf";
 import useEscape from "@hooks/useEscape";
-import { generateUniqueId } from "@utils/id";
 import Header from "./Header.tsx";
 import ControlArea from "./ControlArea.tsx";
 import styles from "./toast-playground.module.scss";
@@ -14,35 +14,24 @@ export default function ToastPlayground() {
 
 	const [message, setMessage] = React.useState("");
 	const [variant, setVariant] = React.useState<ToastVariant>("notice");
-	const [toasts, setToasts] = React.useState<ToastItem[]>([]);
+
+	const { addToast, emptyToasts } = React.useContext(ToastContext);
 
 	useEscape(() => {
-		setToasts([]);
-	}, [setToasts]);
+		emptyToasts();
+	}, []);
 
 	return (
 		<div className={styles.wrapper}>
 			<Header />
-			<ToastShelf
-				toasts={toasts}
-				removeToast={(id) => {
-					setToasts((toasts) => toasts.filter((toast) => toast.id !== id));
-				}}
-			/>
+			<ToastShelf />
 			<ControlArea
 				message={message}
 				setMessage={setMessage}
 				variant={variant}
 				setVariant={setVariant}
 				onPopToast={() => {
-					setToasts((toasts) => [
-						...toasts,
-						{
-							id: generateUniqueId(),
-							variant,
-							message,
-						},
-					]);
+					addToast(message, variant);
 					setMessage("");
 					setVariant("notice");
 				}}

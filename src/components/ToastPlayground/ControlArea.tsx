@@ -63,17 +63,17 @@ export default function ControlArea({ message, setMessage, variant, setVariant, 
 			<Row className={styles.radioRow}>
 				<div className={styles.label}>Variant</div>
 				<div ref={variantSelectRef} className={clsx(styles.inputWrapper, styles.radioWrapper)}>
-					{variants.map(variantType => (
-						<label key={variantType} htmlFor={`variant-${variantType}`}>
+					{variants.map(option => (
+						<label key={option} htmlFor={`variant-${option}`}>
 							<input
-								id={`variant-${variantType}`}
+								id={`variant-${option}`}
 								type="radio"
 								name="variant"
-								value={variantType}
-								checked={variant === variantType}
-								onChange={() => setVariant(variantType)}
+								value={option}
+								checked={variant === option}
+								onChange={() => setVariant(option)}
 							/>
-							{variantType}
+							{option}
 						</label>
 					))}
 				</div>

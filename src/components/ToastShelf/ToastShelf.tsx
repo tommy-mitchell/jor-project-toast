@@ -1,27 +1,18 @@
 import React from "react";
-import Toast, { type ToastProps } from "@components/Toast";
-import type { ReadonlyDeep } from "type-fest";
+import Toast from "@components/Toast";
+import { ToastContext } from "@components/ToastProvider";
 import styles from "./toast-shelf.module.scss";
 
-export type ToastItem = {
-	id: string;
-	variant: ToastProps["variant"];
-	message: string;
-};
+export default function ToastShelf() {
+	const { toasts, dismissToast } = React.useContext(ToastContext);
 
-export type ToastShelfProps = ReadonlyDeep<{
-	toasts: ToastItem[];
-	removeToast: (id: string) => void;
-}>;
-
-export default function ToastShelf({ toasts, removeToast }: ToastShelfProps) {
 	return (
 		<ol className={styles.wrapper}>
 			{toasts.map(({ id, variant, message }) => (
 				<li key={id} className={styles.toastWrapper}>
 					<Toast
 						variant={variant}
-						onClose={() => removeToast(id)}
+						onDismiss={() => dismissToast(id)}
 					>
 						{message}
 					</Toast>

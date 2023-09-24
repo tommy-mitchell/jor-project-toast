@@ -16,10 +16,10 @@ export type ToastVariant = keyof typeof iconsByVariant;
 export type ToastProps = Readonly<{
 	variant: ToastVariant;
 	children: string;
-	onClose: () => void;
+	onDismiss: () => void;
 }>;
 
-export default function Toast({ variant, children, onClose }: ToastProps) {
+export default function Toast({ variant, children, onDismiss }: ToastProps) {
 	const Icon = iconsByVariant[variant];
 
 	return (
@@ -28,7 +28,7 @@ export default function Toast({ variant, children, onClose }: ToastProps) {
 				<Icon size={24} />
 			</div>
 			<p className={styles.content}>{children}</p>
-			<button type="button" className={styles.closeButton} onClick={onClose}>
+			<button type="button" className={styles.closeButton} onClick={onDismiss}>
 				<X size={24} />
 				<VisuallyHidden>Dismiss message</VisuallyHidden>
 			</button>
