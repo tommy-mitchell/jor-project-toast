@@ -47,18 +47,20 @@ export default function ControlArea({ message, setMessage, variant, setVariant, 
 				onPopToast();
 			}}
 		>
-			<Row>
+			<Row className={styles.inputRow}>
 				<label htmlFor="message" className={styles.label} style={{ alignSelf: "baseline" }}>Message</label>
 				<div className={styles.inputWrapper}>
-					<textarea
+					<input
 						id="message"
+						type="text"
 						className={styles.messageInput}
+						maxLength={30}
 						value={message}
 						onChange={(event) => setMessage(event.target.value)}
 					/>
 				</div>
 			</Row>
-			<Row>
+			<Row className={styles.radioRow}>
 				<div className={styles.label}>Variant</div>
 				<div ref={variantSelectRef} className={clsx(styles.inputWrapper, styles.radioWrapper)}>
 					{variants.map(variantType => (
