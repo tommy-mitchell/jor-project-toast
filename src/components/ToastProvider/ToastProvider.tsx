@@ -2,10 +2,13 @@ import React from "react";
 import type { ToastProps } from "@components/Toast";
 import { generateUniqueId } from "@utils/id";
 
-export type ToastItem = {
-	id: string;
+export type ToastState = {
 	variant: ToastProps["variant"];
 	message: string;
+};
+
+export type ToastItem = ToastState & {
+	id: string;
 };
 
 type ToastContextValue = Readonly<{

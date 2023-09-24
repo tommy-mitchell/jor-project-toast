@@ -8,10 +8,6 @@ import ControlArea from "./ControlArea.tsx";
 import styles from "./toast-playground.module.scss";
 
 export default function ToastPlayground() {
-	// TODO: custom hooks
-	// useObjectState
-	// useDefaultState -> resetable
-
 	const [message, setMessage] = React.useState("");
 	const [variant, setVariant] = React.useState<ToastVariant>("notice");
 
