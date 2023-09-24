@@ -1,6 +1,7 @@
 import React from "react";
 import type { ToastVariant } from "@components/Toast";
 import ToastShelf, { type ToastItem } from "@components/ToastShelf";
+import useEscape from "@hooks/use-escape.ts";
 import { generateUniqueId } from "@utils/id.ts";
 import Header from "./Header.tsx";
 import ControlArea from "./ControlArea.tsx";
@@ -15,16 +16,9 @@ export default function ToastPlayground() {
 	const [variant, setVariant] = React.useState<ToastVariant>("notice");
 	const [toasts, setToasts] = React.useState<ToastItem[]>([]);
 
-	React.useEffect(() => {
-		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.key === "Escape") {
-				setToasts([]);
-			}
-		};
-
-		window.addEventListener("keydown", handleKeyDown);
-		return () => window.removeEventListener("keydown", handleKeyDown);
-	}, []);
+	useEscape(() => {
+		setToasts([]);
+	}, [setToasts]);
 
 	return (
 		<div className={styles.wrapper}>

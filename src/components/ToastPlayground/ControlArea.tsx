@@ -1,7 +1,10 @@
 import React from "react";
 import clsx from "clsx";
+import { match } from "ts-pattern";
 import Button from "@components/Button";
 import type { ToastVariant } from "@components/Toast";
+import useKeydown from "@hooks/use-keydown.ts";
+import Row from "./Row.tsx";
 import styles from "./toast-playground.module.scss";
 
 const variants: ToastVariant[] = ["notice", "warning", "success", "error"];
@@ -15,6 +18,27 @@ export type ControlAreaProps = Readonly<{
 }>;
 
 export default function ControlArea({ message, setMessage, variant, setVariant, onPopToast }: ControlAreaProps) {
+	const variantSelectRef = React.useRef<HTMLDivElement>(null);
+
+	useKeydown((event) => {
+		if (!variantSelectRef.current?.contains(document.activeElement)) {
+			return;
+		}
+
+		const handleSetVariant = (nextVariant: ToastVariant) => {
+			event.stopPropagation();
+			setVariant(nextVariant);
+			variantSelectRef.current!.querySelector<HTMLInputElement>(`#variant-${nextVariant}`)?.focus();
+		};
+
+		match(event.code)
+			.with("KeyN", () => handleSetVariant("notice"))
+			.with("KeyW", () => handleSetVariant("warning"))
+			.with("KeyS", () => handleSetVariant("success"))
+			.with("KeyE", () => handleSetVariant("error"))
+			.otherwise(() => {}); // eslint-disable-line @typescript-eslint/no-empty-function
+	}, []);
+
 	return (
 		<form
 			className={styles.controlArea}
@@ -23,7 +47,7 @@ export default function ControlArea({ message, setMessage, variant, setVariant, 
 				onPopToast();
 			}}
 		>
-			<div className={styles.row}>
+			<Row>
 				<label htmlFor="message" className={styles.label} style={{ alignSelf: "baseline" }}>Message</label>
 				<div className={styles.inputWrapper}>
 					<textarea
@@ -33,10 +57,10 @@ export default function ControlArea({ message, setMessage, variant, setVariant, 
 						onChange={(event) => setMessage(event.target.value)}
 					/>
 				</div>
-			</div>
-			<div className={styles.row}>
+			</Row>
+			<Row>
 				<div className={styles.label}>Variant</div>
-				<div className={clsx(styles.inputWrapper, styles.radioWrapper)}>
+				<div ref={variantSelectRef} className={clsx(styles.inputWrapper, styles.radioWrapper)}>
 					{variants.map(variantType => (
 						<label key={variantType} htmlFor={`variant-${variantType}`}>
 							<input
@@ -51,13 +75,13 @@ export default function ControlArea({ message, setMessage, variant, setVariant, 
 						</label>
 					))}
 				</div>
-			</div>
-			<div className={styles.row}>
+			</Row>
+			<Row>
 				<div className={styles.label} />
 				<div className={clsx(styles.inputWrapper, styles.radioWrapper)}>
 					<Button type="submit" disabled={!message}>Pop Toast!</Button>
 				</div>
-			</div>
+			</Row>
 		</form>
 	);
 }
