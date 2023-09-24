@@ -3,7 +3,7 @@ import styles from "./visually-hidden.module.scss";
 
 // dprint-ignore
 type VisuallyHiddenProps = React.ComponentPropsWithoutRef<"span"> & Readonly<{
-	children?: string;
+	children?: string | string[];
 }>;
 
 export default function VisuallyHidden({ children, ...props }: VisuallyHiddenProps) {

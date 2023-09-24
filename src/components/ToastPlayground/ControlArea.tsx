@@ -17,7 +17,8 @@ export type ControlAreaProps = Readonly<{
 	onPopToast: () => void;
 }>;
 
-export default function ControlArea({ message, setMessage, variant, setVariant, onPopToast }: ControlAreaProps) {
+function ControlArea(props: ControlAreaProps, forwardedRef: React.Ref<HTMLDivElement>) {
+	const { message, setMessage, variant, setVariant, onPopToast } = props;
 	const variantSelectRef = React.useRef<HTMLDivElement>(null);
 
 	useKeydown((event) => {
@@ -62,7 +63,20 @@ export default function ControlArea({ message, setMessage, variant, setVariant, 
 			</Row>
 			<Row className={styles.radioRow}>
 				<div className={styles.label}>Variant</div>
-				<div ref={variantSelectRef} className={clsx(styles.inputWrapper, styles.radioWrapper)}>
+				<div
+					ref={(instance) => {
+						if (typeof forwardedRef === "function") {
+							forwardedRef(instance);
+						} else if (forwardedRef !== null) {
+							// @ts-expect-error: `current` is readonly
+							forwardedRef.current = instance;
+						}
+
+						// @ts-expect-error: `current` is readonly
+						variantSelectRef.current = instance;
+					}}
+					className={clsx(styles.inputWrapper, styles.radioWrapper)}
+				>
 					{variants.map(option => (
 						<label key={option} htmlFor={`variant-${option}`}>
 							<input
@@ -87,3 +101,5 @@ export default function ControlArea({ message, setMessage, variant, setVariant, 
 		</form>
 	);
 }
+
+export default React.forwardRef(ControlArea);
