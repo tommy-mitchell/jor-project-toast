@@ -1,6 +1,6 @@
-import type { ReadonlyDeep } from "type-fest";
 import React from "react";
 import Toast, { type ToastProps } from "@components/Toast";
+import type { ReadonlyDeep } from "type-fest";
 import styles from "./toast-shelf.module.scss";
 
 export type ToastItem = {

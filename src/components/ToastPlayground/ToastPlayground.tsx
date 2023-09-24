@@ -1,8 +1,8 @@
 import React from "react";
 import type { ToastVariant } from "@components/Toast";
 import ToastShelf, { type ToastItem } from "@components/ToastShelf";
-import useEscape from "@hooks/use-escape.ts";
-import { generateUniqueId } from "@utils/id.ts";
+import useEscape from "@hooks/useEscape";
+import { generateUniqueId } from "@utils/id";
 import Header from "./Header.tsx";
 import ControlArea from "./ControlArea.tsx";
 import styles from "./toast-playground.module.scss";

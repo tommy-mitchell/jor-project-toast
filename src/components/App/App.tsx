@@ -1,7 +1,7 @@
 import React from "react";
 import ToastPlayground from "@components/ToastPlayground";
 import Footer from "@components/Footer";
-import useEscape from "@hooks/use-escape";
+import useEscape from "@hooks/useEscape";
 
 export default function App() {
 	useEscape(() => {

@@ -8,6 +8,7 @@ export default {
 			cases: {
 				kebabCase: true,
 				pascalCase: true,
+				camelCase: true,
 			},
 		}],
 		"react/no-array-index-key": "warn",

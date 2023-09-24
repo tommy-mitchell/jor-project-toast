@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { match } from "ts-pattern";
 import Button from "@components/Button";
 import type { ToastVariant } from "@components/Toast";
-import useKeydown from "@hooks/use-keydown.ts";
+import useKeydown from "@hooks/useKeydown";
 import Row from "./Row.tsx";
 import styles from "./toast-playground.module.scss";
 

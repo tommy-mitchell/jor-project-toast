@@ -1,4 +1,4 @@
-import useKeydown from "./use-keydown.ts";
+import useKeydown from "./useKeydown.ts";
 
 export default function useEscape(callback: () => void, deps: React.DependencyList) {
 	useKeydown((event) => {
