@@ -1,6 +1,6 @@
 {
 	"extends": "@tommy-mitchell/tsconfig",
-	"include": ["src", "tailwind.*.ts"],
+	"include": ["src"],
 	"references": [{ "path": "./tsconfig.node.json" }],
 	"compilerOptions": {
 		"noUnusedLocals": false,

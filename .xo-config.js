@@ -1,5 +1,5 @@
 export default {
-	extends: ["xo-react", "plugin:@phaphoso/dprint/disable-conflict-rules", "plugin:tailwindcss/recommended"],
+	extends: ["xo-react", "plugin:@phaphoso/dprint/disable-conflict-rules"],
 	ignores: ["src/vite-env.d.ts"],
 	rules: {
 		"object-shorthand": "off",
@@ -27,9 +27,6 @@ export default {
 			"newlines-between": "never",
 			"warnOnUnassignedImports": true,
 			"distinctGroup": true,
-		}],
-		"tailwindcss/no-custom-classname": ["warn", {
-			callees: ["classnames", "clsx", "ctl", "cva", "tv", "cn", "cnx"],
 		}],
 	},
 	overrides: [
