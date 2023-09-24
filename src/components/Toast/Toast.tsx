@@ -20,10 +20,12 @@ export type ToastProps = Readonly<{
 }>;
 
 export default function Toast({ variant, children, onClose }: ToastProps) {
+	const Icon = iconsByVariant[variant];
+
 	return (
 		<div className={clsx(styles.toast, styles[variant])}>
 			<div className={styles.iconContainer}>
-				<Info size={24} />
+				<Icon size={24} />
 			</div>
 			<p className={styles.content}>{children}</p>
 			<button type="button" className={styles.closeButton} onClick={onClose}>
