@@ -10,10 +10,10 @@ const iconsByVariant = {
 	error: AlertOctagon,
 } as const;
 
-type Variant = keyof typeof iconsByVariant;
+export type ToastVariant = keyof typeof iconsByVariant;
 
-type ToastProps = Readonly<{
-	variant: Variant;
+export type ToastProps = Readonly<{
+	variant: ToastVariant;
 	children: string;
 }>;
 
