@@ -97,6 +97,10 @@
 		align-items: center;
 		gap: 8px;
 		width: 100px;
+
+		@media (min-width: 700px) {
+			width: fit-content;
+		}
 	}
 }
 

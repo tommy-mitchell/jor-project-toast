@@ -11,9 +11,10 @@ export type ControlAreaProps = Readonly<{
 	setMessage: (message: string) => void;
 	variant: ToastVariant;
 	setVariant: (variant: ToastVariant) => void;
+	onPopToast: () => void;
 }>;
 
-export default function ControlArea({ message, setMessage, variant, setVariant }: ControlAreaProps) {
+export default function ControlArea({ message, setMessage, variant, setVariant, onPopToast }: ControlAreaProps) {
 	return (
 		<div className={styles.controlArea}>
 			<div className={styles.row}>
@@ -48,7 +49,7 @@ export default function ControlArea({ message, setMessage, variant, setVariant }
 			<div className={styles.row}>
 				<div className={styles.label} />
 				<div className={clsx(styles.inputWrapper, styles.radioWrapper)}>
-					<Button disabled>Pop Toast!</Button>
+					<Button disabled={!message} onClick={onPopToast}>Pop Toast!</Button>
 				</div>
 			</div>
 		</div>
