@@ -1,25 +1,57 @@
 import React from "react";
-import Toast, { type ToastVariant } from "@components/Toast";
-import useToggle from "@hooks/use-toggle";
+import type { ToastVariant } from "@components/Toast";
+import ToastShelf, { type ToastItem } from "@components/ToastShelf";
+import { generateUniqueId } from "@utils/id.ts";
 import Header from "./Header.tsx";
 import ControlArea from "./ControlArea.tsx";
 import styles from "./toast-playground.module.scss";
 
 export default function ToastPlayground() {
+	// TODO: custom hooks
+	// useObjectState
+	// useDefaultState -> resetable
+
 	const [message, setMessage] = React.useState("");
 	const [variant, setVariant] = React.useState<ToastVariant>("notice");
-	const [isPreviewVisible, toggleIsPreviewVisible] = useToggle(false);
+	const [toasts, setToasts] = React.useState<ToastItem[]>([]);
+
+	React.useEffect(() => {
+		const handleKeyDown = (event: KeyboardEvent) => {
+			if (event.key === "Escape") {
+				setToasts([]);
+			}
+		};
+
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, []);
 
 	return (
 		<div className={styles.wrapper}>
 			<Header />
-			{isPreviewVisible && <Toast variant={variant} onClose={toggleIsPreviewVisible}>{message}</Toast>}
+			<ToastShelf
+				toasts={toasts}
+				removeToast={(id) => {
+					setToasts((toasts) => toasts.filter((toast) => toast.id !== id));
+				}}
+			/>
 			<ControlArea
 				message={message}
 				setMessage={setMessage}
 				variant={variant}
 				setVariant={setVariant}
-				onPopToast={toggleIsPreviewVisible}
+				onPopToast={() => {
+					setToasts((toasts) => [
+						...toasts,
+						{
+							id: generateUniqueId(),
+							variant,
+							message,
+						},
+					]);
+					setMessage("");
+					setVariant("notice");
+				}}
 			/>
 		</div>
 	);

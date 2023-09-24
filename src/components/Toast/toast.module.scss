@@ -34,6 +34,10 @@
 	background: transparent;
 	padding: 16px;
 	cursor: pointer;
+
+	&:hover, &:focus-visible {
+		color: #777;
+	}
 }
 
 // Variants

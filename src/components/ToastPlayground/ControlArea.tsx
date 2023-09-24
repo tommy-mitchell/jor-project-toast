@@ -16,7 +16,13 @@ export type ControlAreaProps = Readonly<{
 
 export default function ControlArea({ message, setMessage, variant, setVariant, onPopToast }: ControlAreaProps) {
 	return (
-		<div className={styles.controlArea}>
+		<form
+			className={styles.controlArea}
+			onSubmit={(event) => {
+				event.preventDefault();
+				onPopToast();
+			}}
+		>
 			<div className={styles.row}>
 				<label htmlFor="message" className={styles.label} style={{ alignSelf: "baseline" }}>Message</label>
 				<div className={styles.inputWrapper}>
@@ -49,9 +55,9 @@ export default function ControlArea({ message, setMessage, variant, setVariant, 
 			<div className={styles.row}>
 				<div className={styles.label} />
 				<div className={clsx(styles.inputWrapper, styles.radioWrapper)}>
-					<Button disabled={!message} onClick={onPopToast}>Pop Toast!</Button>
+					<Button type="submit" disabled={!message}>Pop Toast!</Button>
 				</div>
 			</div>
-		</div>
+		</form>
 	);
 }
