@@ -6,12 +6,16 @@ import styles from "./toast-playground.module.scss";
 
 const variants: ToastVariant[] = ["notice", "warning", "success", "error"];
 
-export default function ControlArea() {
-	const [message, setMessage] = React.useState("");
-	const [variant, setVariant] = React.useState<ToastVariant>("notice");
+export type ControlAreaProps = Readonly<{
+	message: string;
+	setMessage: (message: string) => void;
+	variant: ToastVariant;
+	setVariant: (variant: ToastVariant) => void;
+}>;
 
+export default function ControlArea({ message, setMessage, variant, setVariant }: ControlAreaProps) {
 	return (
-		<div className={styles.controlsWrapper}>
+		<div className={styles.controlArea}>
 			<div className={styles.row}>
 				<label htmlFor="message" className={styles.label} style={{ alignSelf: "baseline" }}>Message</label>
 				<div className={styles.inputWrapper}>
@@ -44,7 +48,7 @@ export default function ControlArea() {
 			<div className={styles.row}>
 				<div className={styles.label} />
 				<div className={clsx(styles.inputWrapper, styles.radioWrapper)}>
-					<Button>Pop Toast!</Button>
+					<Button disabled>Pop Toast!</Button>
 				</div>
 			</div>
 		</div>

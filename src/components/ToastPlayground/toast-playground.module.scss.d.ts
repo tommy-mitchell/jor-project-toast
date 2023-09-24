@@ -1,7 +1,7 @@
 declare const classNames: {
   readonly wrapper: "wrapper";
   readonly header: "header";
-  readonly controlsWrapper: "controlsWrapper";
+  readonly controlArea: "controlArea";
   readonly row: "row";
   readonly titleMessageWrapper: "titleMessageWrapper";
   readonly titleMessageRow: "titleMessageRow";

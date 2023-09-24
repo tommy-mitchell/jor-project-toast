@@ -12,4 +12,18 @@
 	font-size: 1.25rem;
 	cursor: pointer;
 	outline-offset: 4px;
+
+	&:hover {
+		background: linear-gradient(
+			to top,
+			hsl(261, 55%, 39%),
+			hsl(294, 65%, 49%)
+		);
+	}
+
+	&:disabled {
+		background: hsl(0deg 0% 70%);
+		color: hsl(0deg 0% 50%);
+		cursor: not-allowed;
+	}
 }
